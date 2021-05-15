@@ -1,6 +1,6 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const stripe = require('stripe')('sk_test_dz1CxU2WW8F7M8jPi3MTbyb100bjEBXtdD');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 const app = express();
 const router = express.Router();
