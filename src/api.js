@@ -3,6 +3,9 @@ const serverless = require("serverless-http")
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
 const app = express()
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 const router = express.Router()
 
 router.get('/plans', async (req, res) => {
@@ -15,7 +18,6 @@ router.get('/plans', async (req, res) => {
 })
 
 router.post('/pay', async (req, res) => {
-  console.log(req.body)
   try {
     const { id } = await stripe.customers.create({
       email: req.body.email,
@@ -36,8 +38,8 @@ router.post('/pay', async (req, res) => {
 
 router.post('/subscription', async (req, res) => {
   try {
-    const customer = await stripe.customers.retrieve(
-      req.body.customerId
+    const customer = await stripe.subscriptions.retrieve(
+      req.body.subId
     )
     res.json(customer)
   } catch (err) {
