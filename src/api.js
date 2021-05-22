@@ -49,7 +49,7 @@ router.post('/subscription', async (req, res) => {
 
 router.post('/unsubscribe', async (req, res) => {
   try {
-    const deleted = await stripe.subscriptions.retrieve(
+    const deleted = await stripe.subscriptions.del(
       req.body.subId
     )
     res.json(deleted)
