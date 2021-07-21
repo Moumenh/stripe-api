@@ -28,6 +28,7 @@ router.post('/pay', async (req, res) => {
       items: [
         { price: req.body.plan },
       ],
+      cancel_at_period_end: true
     })
     res.json(subscription)
   } catch (err) {
